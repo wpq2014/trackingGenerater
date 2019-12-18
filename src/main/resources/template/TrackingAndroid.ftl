@@ -1,4 +1,4 @@
-// this is auto
+// this is auto generated file, never change it by hand
 <#if package??>
 package ${package};
 </#if>
