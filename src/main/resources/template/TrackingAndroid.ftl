@@ -4,8 +4,6 @@ package ${package};
 </#if>
 
 import java.util.HashMap;
-import org.json.JSONObject;
-import com.sensorsdata.analytics.android.sdk.SensorsDataAPI;
 
 public class Tracking {
 

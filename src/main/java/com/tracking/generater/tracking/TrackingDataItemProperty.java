@@ -1,4 +1,4 @@
-package test.test.tracking;
+package com.tracking.generater.tracking;
 
 public class TrackingDataItemProperty {
 

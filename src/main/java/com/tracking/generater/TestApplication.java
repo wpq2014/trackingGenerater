@@ -1,4 +1,4 @@
-package test.test;
+package com.tracking.generater;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
