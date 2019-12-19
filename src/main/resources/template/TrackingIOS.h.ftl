@@ -12,14 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 <#list trackingList as tracking>
-//${tracking.trackingDescription!""}
-//${tracking.trackingTiming!""}
+//埋点事件名: ${tracking.trackingDescription!""}
+//埋点时机: ${tracking.trackingTiming!""}
 @interface DK${tracking.className}Model : DKSaStatisticsBaseModel
     <#list tracking.propertyList as property>
-    //${property.propNameDescription!""}
-    @property (nonatomic, copy) NSString *${property.name};
+        <#if (property.name)?trim?length gt 1>
+//属性名: ${property.propNameDescription!""}
+@property (nonatomic, copy) NSString *${property.name};
+        </#if>
     </#list>
 @end
+
 </#list>
 
 NS_ASSUME_NONNULL_END

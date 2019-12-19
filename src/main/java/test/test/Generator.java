@@ -25,8 +25,8 @@ public class Generator {
     }
 
     public static void main(String[] args) throws Exception {
-
-        String filePath = "/Users/bingao/Downloads/用户增长埋点_1.29.xlsx";
+        String filePath = "/Users/bingao/Downloads/线上出房埋点_1.29.xlsx";
+//        String filePath = "/Users/bingao/Downloads/用户增长埋点_1.29.xlsx";
         List<TrackingDataItem> trackingList = ExcelReader.readXls(filePath, "事件表");
         Map<String, Object> root = new HashMap<>();
         root.put("trackingList", trackingList);
@@ -40,7 +40,7 @@ public class Generator {
         //generate android java file
         Template template = getDefinedTemplate("TrackingAndroid.ftl");
 
-        root.put("package", "test.test1.tracking");
+        root.put("package", "com.dankegongyu.customer");
         OutputStream fos = new FileOutputStream( new File(savePath, "Tracking.java"));
         Writer out = new OutputStreamWriter(fos);
         template.process(root, out);

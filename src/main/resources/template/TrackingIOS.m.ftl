@@ -11,12 +11,14 @@
 
 -(instancetype)init
 {
-self = [super init];
-if (self) {
-self.eventName = @"${tracking.name}";
-}
-return self;
+    self = [super init];
+    if (self) {
+        self.eventName = @"${tracking.name}";
+    }
+    return self;
 }
 @end
+
+
 </#list>
 

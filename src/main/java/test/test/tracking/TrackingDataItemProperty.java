@@ -10,6 +10,8 @@ public class TrackingDataItemProperty {
 
     private String propTypeDescription;
 
+    private String methodName;
+
     public String getPropNameDescription() {
         return propNameDescription;
     }
@@ -40,5 +42,13 @@ public class TrackingDataItemProperty {
 
     public void setPropTypeDescription(String propTypeDescription) {
         this.propTypeDescription = propTypeDescription;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 }
