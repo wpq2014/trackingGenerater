@@ -63,7 +63,7 @@ public class ExcelReader {
                 continue;
             }
 
-            //过滤结束的空行
+            //跳过结束的空行
             if (isEmptyRow(row)) {
                 continue;
             }
@@ -82,6 +82,7 @@ public class ExcelReader {
                     dataItem = new TrackingDataItem();
                     propertyList = new ArrayList<>();
 
+                    //设置埋点定义
                     dataItem.setName(row.getCell(1).getStringCellValue().trim());
                     dataItem.setTrackingDescription(row.getCell(2).getStringCellValue());
                     dataItem.setTrackingTiming(row.getCell(8).getStringCellValue());
@@ -91,23 +92,12 @@ public class ExcelReader {
                     String instanceName = className.substring(0,1).toLowerCase().concat(className.substring(1, className.length()));
                     dataItem.setInstanceName(instanceName.trim());
 
-
-                    TrackingDataItemProperty trackingDataItemProperty = new TrackingDataItemProperty();
-                    trackingDataItemProperty.setName(row.getCell(3).getStringCellValue().trim());
-                    trackingDataItemProperty.setPropNameDescription(row.getCell(4).getStringCellValue());
-                    trackingDataItemProperty.setPropType(row.getCell(5).getStringCellValue());
-                    trackingDataItemProperty.setPropTypeDescription(row.getCell(6).getStringCellValue());
-                    trackingDataItemProperty.setMethodName(underlineToCamelCase(trackingDataItemProperty.getName()));
-                    propertyList.add(trackingDataItemProperty);
+                    //设置属性
+                    extractPropertyFromXSSFRow(propertyList, row);
 
                 } else {//这是一条只有属性相关定义
-                    TrackingDataItemProperty trackingDataItemProperty = new TrackingDataItemProperty();
-                    trackingDataItemProperty.setName(row.getCell(3).getStringCellValue());
-                    trackingDataItemProperty.setPropNameDescription(row.getCell(4).getStringCellValue());
-                    trackingDataItemProperty.setPropType(row.getCell(5).getStringCellValue());
-                    trackingDataItemProperty.setPropTypeDescription(row.getCell(6).getStringCellValue());
-                    trackingDataItemProperty.setMethodName(underlineToCamelCase(trackingDataItemProperty.getName()));
-                    propertyList.add(trackingDataItemProperty);
+
+                    extractPropertyFromXSSFRow(propertyList, row);
                 }
 
             }
@@ -118,9 +108,14 @@ public class ExcelReader {
 
     }
 
-//    public static void main(String args[]) throws Exception {
-//        String filePath = "/Users/bingao/Downloads/用户增长埋点_1.29.xlsx";
-//        List<TrackingDataItem> result = readXls(filePath, "事件表");
-//        System.out.println("result = " + result);
-//    }
+    private static void extractPropertyFromXSSFRow(List<TrackingDataItemProperty> propertyList, XSSFRow row) {
+        TrackingDataItemProperty trackingDataItemProperty = new TrackingDataItemProperty();
+        trackingDataItemProperty.setName(row.getCell(3).getStringCellValue().trim());
+        trackingDataItemProperty.setPropNameDescription(row.getCell(4).getStringCellValue());
+        trackingDataItemProperty.setPropType(row.getCell(5).getStringCellValue());
+        trackingDataItemProperty.setPropTypeDescription(row.getCell(6).getStringCellValue());
+        trackingDataItemProperty.setMethodName(underlineToCamelCase(trackingDataItemProperty.getName()));
+        propertyList.add(trackingDataItemProperty);
+    }
+
 }
