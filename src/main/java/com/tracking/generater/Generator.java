@@ -26,8 +26,8 @@ public class Generator {
     }
 
     public static void main(String[] args) throws Exception {
-//        String filePath = "./src/main/resources/埋点.xlsx";
-        String filePath = "/Users/wupuquan/Downloads/1.29.0/线上出房前端埋点_1.29_1224.xlsx";
+        String filePath = "./src/main/resources/埋点.xlsx";
+//        String filePath = "/Users/xxx/Downloads/埋点.xlsx";
         List<TrackingDataItem> trackingList = ExcelReader.readXls(filePath, "事件表");
 
         Map<String, Object> root = new HashMap<>();
@@ -40,16 +40,16 @@ public class Generator {
 
         //generater android java file
         Template template = getDefinedTemplate("TrackingAndroid.ftl");
-        root.put("package", "com.dankegongyu.customer");
+        root.put("package", "package");
         writeToFile(root, savePath, template, "Tracking.java");
 
         //generater iOS h file
         template = getDefinedTemplate("TrackingIOS.h.ftl");
-        writeToFile(root, savePath, template, "DKSaStatisticsBaseModel.h");
+        writeToFile(root, savePath, template, "SaStatisticsBaseModel.h");
 
         //generater iOS m file
         template = getDefinedTemplate("TrackingIOS.m.ftl");
-        writeToFile(root, savePath, template, "DKSaStatisticsBaseModel.m");
+        writeToFile(root, savePath, template, "SaStatisticsBaseModel.m");
     }
 
     private static void writeToFile(Map<String, Object> root, String savePath, Template template, String fileName) throws TemplateException, IOException {
