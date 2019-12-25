@@ -19,25 +19,24 @@ public class Generator {
         Configuration cfg = new Configuration();
         File file = new File(".");
         System.out.println("file = " + file.getAbsolutePath());
-        cfg.setDirectoryForTemplateLoading(new File("./test/src/main/resources/template/"));
+        cfg.setDirectoryForTemplateLoading(new File("./src/main/resources/template/"));
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         return cfg.getTemplate(templateName);
     }
 
     public static void main(String[] args) throws Exception {
-        String filePath = "/Users/bingao/Downloads/线上出房埋点_1.29.xlsx";
+//        String filePath = "./src/main/resources/埋点.xlsx";
+        String filePath = "/Users/wupuquan/Downloads/1.29.0/线上出房前端埋点_1.29_1224.xlsx";
         List<TrackingDataItem> trackingList = ExcelReader.readXls(filePath, "事件表");
-
 
         Map<String, Object> root = new HashMap<>();
         root.put("trackingList", trackingList);
-        String savePath = "./test/generated/";
+        String savePath = "./generated/";
         File file = new File(savePath);
         if (!file.exists()) {
             file.mkdirs();
         }
-
 
         //generater android java file
         Template template = getDefinedTemplate("TrackingAndroid.ftl");
@@ -48,11 +47,9 @@ public class Generator {
         template = getDefinedTemplate("TrackingIOS.h.ftl");
         writeToFile(root, savePath, template, "DKSaStatisticsBaseModel.h");
 
-
         //generater iOS m file
         template = getDefinedTemplate("TrackingIOS.m.ftl");
         writeToFile(root, savePath, template, "DKSaStatisticsBaseModel.m");
-
     }
 
     private static void writeToFile(Map<String, Object> root, String savePath, Template template, String fileName) throws TemplateException, IOException {

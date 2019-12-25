@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 //属性名: 搜索词性
 @property (nonatomic, copy) NSString *wordType;
 //属性名: 附近
-@property (nonatomic, copy) NSString *nearBy;
+@property (nonatomic, copy) NSString *nearby;
 //属性名: 商圈
 @property (nonatomic, copy) NSString *block;
 //属性名: 地铁
