@@ -35,7 +35,7 @@ public class Tracking {
      */
     public static class ${tracking.className} extends Tracking {
 
-        ${tracking.className}() {
+        public ${tracking.className}() {
             super.name = "${tracking.name}";
         }
 
